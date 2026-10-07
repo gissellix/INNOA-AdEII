@@ -30,6 +30,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/INNOA-AdEII/",
               "budgets": [
                 {
                   "type": "initial",
