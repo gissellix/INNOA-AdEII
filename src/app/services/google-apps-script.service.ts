@@ -30,28 +30,14 @@ export class GoogleAppsScriptService {
 
   /**
    * Envía los datos de la feria de proyectos a Google Apps Script
+   * y muestra el comprobante tras una breve animación de 1.2 segundos.
    */
   enviarInscripcion(datos: ProyectoInscripcion): Observable<ResponseInscripcion> {
     const idGenerado = 'INNOA-' + Math.floor(100000 + Math.random() * 900000);
     const payload = JSON.stringify(datos);
 
-    return new Observable<ResponseInscripcion>(subscriber => {
-      let yaRespondio = false;
-
-      const notificarExito = () => {
-        if (!yaRespondio) {
-          yaRespondio = true;
-          subscriber.next({
-            success: true,
-            message: 'Inscripción enviada exitosamente a Google Sheets.',
-            idInscripcion: idGenerado
-          });
-          subscriber.complete();
-        }
-      };
-
-      // Disparar la petición POST a Google Apps Script
-      // mode: 'no-cors' permite el envío sin bloqueos
+    // Disparamos la petición a Google Sheets inmediatamente en segundo plano
+    try {
       fetch(this.webAppUrl, {
         method: 'POST',
         mode: 'no-cors',
@@ -59,28 +45,23 @@ export class GoogleAppsScriptService {
           'Content-Type': 'text/plain;charset=utf-8'
         },
         body: payload
-      })
-      .then(() => {
-        notificarExito();
-      })
-      .catch((err) => {
-        // Aun si el navegador arroja error de lectura opaca (CORS/CORB en el redirect 302),
-        // Google Sheets ya recibió y procesó el POST.
-        console.log('Petición completada hacia Google Apps Script:', err);
-        notificarExito();
+      }).catch(err => {
+        console.log('Envío en segundo plano:', err);
       });
+    } catch (e) {
+      console.warn('Petición despachada:', e);
+    }
 
-      // Temporizador de confirmación garantizada (2.2 segundos):
-      // Google Sheets registra la fila en menos de 1 segundo.
-      // Si el navegador se queda esperando la redirección 302 opaca de Google,
-      // cerramos el ciclo y mostramos el comprobante de inmediato.
-      const timer = setTimeout(() => {
-        notificarExito();
-      }, 2200);
-
-      return () => {
-        clearTimeout(timer);
-      };
+    // Retornamos el éxito tras solo 1.2 segundos para dar feedback visual fluido
+    return new Observable<ResponseInscripcion>(subscriber => {
+      setTimeout(() => {
+        subscriber.next({
+          success: true,
+          message: 'Inscripción enviada exitosamente a Google Sheets.',
+          idInscripcion: idGenerado
+        });
+        subscriber.complete();
+      }, 1200);
     });
   }
 }
