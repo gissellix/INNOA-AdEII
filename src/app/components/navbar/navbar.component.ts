@@ -11,10 +11,8 @@ import { CommonModule } from '@angular/common';
         
         <!-- Logo & Brand Header -->
         <a href="#" class="flex items-center gap-3 group">
-          <div class="w-11 h-11 bg-gradient-to-br from-[#7c3aed] to-[#b5f542] p-0.5 rounded-xl transition-transform group-hover:scale-105">
-            <div class="w-full h-full bg-[#0b0f19] rounded-[10px] flex items-center justify-center">
-              <i class="fa-solid fa-microchip text-[#b5f542] text-xl"></i>
-            </div>
+          <div class="w-12 h-12 bg-[#151c2e] border border-[#2a3654] p-1.5 rounded-xl transition-transform group-hover:scale-105 flex items-center justify-center overflow-hidden">
+            <img src="images/adeii-logo.png" alt="Logo AdEII" class="w-full h-full object-contain">
           </div>
           <div>
             <div class="flex items-center gap-2">

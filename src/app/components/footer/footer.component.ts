@@ -15,10 +15,8 @@ import { CommonModule } from '@angular/common';
           <!-- Brand Info -->
           <div class="md:col-span-2 space-y-4">
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 bg-gradient-to-br from-[#7c3aed] to-[#b5f542] p-0.5 rounded-xl">
-                <div class="w-full h-full bg-[#0b0f19] rounded-[10px] flex items-center justify-center">
-                  <i class="fa-solid fa-microchip text-[#b5f542]"></i>
-                </div>
+              <div class="w-11 h-11 bg-[#151c2e] border border-[#2a3654] p-1.5 rounded-xl flex items-center justify-center overflow-hidden">
+                <img src="images/adeii-logo.png" alt="Logo AdEII" class="w-full h-full object-contain">
               </div>
               <div>
                 <span class="font-extrabold text-2xl tracking-tighter text-white">IINNOA 2026</span>

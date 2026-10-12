@@ -1,0 +1,36 @@
+name: Desplegar IINNOA Web a GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar Dependencias
+        run: |
+          npm ci || npm install
+
+      - name: Compilar App Angular para GitHub Pages
+        run: |
+          npx ng build --configuration production --base-href /INNOA-AdEII/
+
+      - name: Desplegar a la rama gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist/innoa-app/browser
+          branch: gh-pages

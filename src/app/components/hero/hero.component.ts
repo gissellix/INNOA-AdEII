@@ -102,17 +102,16 @@ import { CommonModule } from '@angular/common';
               
               <!-- Mascot Content Area -->
               <div class="p-8 text-center bg-gradient-to-b from-[#151c2e] to-[#0d1322] relative overflow-hidden">
-                <div class="w-64 h-64 mx-auto relative flex items-center justify-center">
-                  <!-- Animated Pulse Halo -->
-                  <div class="absolute inset-0 bg-[#b5f542]/10 rounded-full animate-ping pointer-events-none"></div>
+                <div class="w-full max-w-xs mx-auto relative flex flex-col items-center justify-center">
+                  <!-- Animated Glow Halo -->
+                  <div class="absolute inset-0 bg-[#b5f542]/15 rounded-full blur-3xl pointer-events-none"></div>
                   
-                  <!-- Styled Mascot Representation: Robot riding Llama 🤖🦙 -->
-                  <div class="relative z-10 space-y-2">
-                    <div class="text-8xl transform group-hover:scale-110 transition-transform duration-300 filter drop-shadow-[0_0_25px_rgba(181,245,66,0.5)]">
-                      🤖🦙
-                    </div>
-                    <div class="inline-block bg-[#7c3aed] text-white text-xs font-mono font-bold px-3 py-1 rounded-full shadow-lg">
-                      BIENVENIDOS A JUJUY!
+                  <!-- Real Mascot: Robot riding Llama -->
+                  <div class="relative z-10 space-y-3 flex flex-col items-center">
+                    <img src="images/robot-llama.png" alt="Mascota IINNOA 2026 - Robot y Llama" 
+                         class="max-h-72 w-auto object-contain transform group-hover:scale-105 transition-transform duration-300 filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.7)]">
+                    <div class="inline-block bg-[#7c3aed] text-white text-xs font-mono font-bold px-4 py-1.5 rounded-full shadow-lg border border-[#a855f7]/50 tracking-wider">
+                      ¡BIENVENIDOS A JUJUY!
                     </div>
                   </div>
                 </div>
