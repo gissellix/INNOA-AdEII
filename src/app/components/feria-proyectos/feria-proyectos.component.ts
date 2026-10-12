@@ -325,12 +325,16 @@ export class FeriaProyectosComponent {
     this.scriptService.enviarInscripcion(this.proyecto).subscribe({
       next: (res) => {
         this.cargando = false;
-        this.modalResultado = res;
+        if (res.success) {
+          this.modalResultado = res;
+        } else {
+          alert(res.message);
+        }
       },
       error: (err) => {
         this.cargando = false;
         console.error(err);
-        alert('Ocurrió un error al procesar el formulario.');
+        alert('Ocurrió un error al conectar con Google Sheets.');
       }
     });
   }

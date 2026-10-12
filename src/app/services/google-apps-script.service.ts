@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, from, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable, from, of, timeout, catchError, map } from 'rxjs';
 import { ProyectoInscripcion } from '../models/innoa.models';
 
 export interface ResponseInscripcion {
@@ -33,13 +32,13 @@ export class GoogleAppsScriptService {
    * Envía los datos de la feria de proyectos a Google Apps Script
    */
   enviarInscripcion(datos: ProyectoInscripcion): Observable<ResponseInscripcion> {
-    // Si la URL sigue siendo la de ejemplo, simulamos para pruebas locales
+    // Si la URL sigue siendo la de ejemplo, simulamos para demostración fluida
     if (this.webAppUrl.includes('YOUR_GOOGLE_APPS_SCRIPT_ID_HERE')) {
       return new Observable<ResponseInscripcion>(subscriber => {
         setTimeout(() => {
           subscriber.next({
             success: true,
-            message: 'Inscripción registrada exitosamente en modo simulación.',
+            message: 'Inscripción registrada exitosamente (Modo Simulación).',
             idInscripcion: 'INNOA-' + Math.floor(100000 + Math.random() * 900000)
           });
           subscriber.complete();
@@ -47,8 +46,9 @@ export class GoogleAppsScriptService {
       });
     }
 
-    // Google Apps Script Web App recibe JSON mediante POST
-    // text/plain;charset=utf-8 evita bloqueos de preflight CORS en navegadores
+    const payload = JSON.stringify(datos);
+
+    // Enviar a Google Apps Script con timeout de seguridad
     return from(
       fetch(this.webAppUrl, {
         method: 'POST',
@@ -56,19 +56,20 @@ export class GoogleAppsScriptService {
         headers: {
           'Content-Type': 'text/plain;charset=utf-8'
         },
-        body: JSON.stringify(datos)
+        body: payload
       })
     ).pipe(
+      timeout(12000), // Si tarda más de 12 segundos, corta para evitar bloqueo
       map(() => ({
         success: true,
-        message: 'Inscripción enviada y guardada correctamente en Google Sheets.',
+        message: 'Inscripción enviada exitosamente a Google Sheets.',
         idInscripcion: 'INNOA-' + Math.floor(100000 + Math.random() * 900000)
       })),
       catchError(error => {
-        console.error('Error enviando inscripción:', error);
+        console.error('Error o Timeout enviando a Google Apps Script:', error);
         return of({
           success: false,
-          message: 'Ocurrió un error al enviar el formulario. Verifica tu conexión e inténtalo nuevamente.'
+          message: 'No se pudo conectar con Google Apps Script. Por favor revisa los permisos de acceso del despliegue en Google Sheets.'
         });
       })
     );
