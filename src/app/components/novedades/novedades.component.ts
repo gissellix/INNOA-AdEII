@@ -90,8 +90,8 @@ export class NovedadesComponent {
       id: '3',
       fecha: '28 SEP 2026',
       categoria: 'DISERTANTES',
-      titulo: 'Confirmada la grilla de referentes en IA & Ciberseguridad',
-      resumen: 'Contaremos con especialistas internacionales que abordarán las tendencias en grandes modelos de lenguaje, seguridad en la nube y neurotecnologías.',
+      titulo: 'Confirmada la grilla de referentes en IA, Ciberseguridad & Forensia Digital',
+      resumen: 'Contaremos con especialistas que abordarán las tendencias en grandes modelos de lenguaje, seguridad en la nube, forensia digital y nuevas tecnologías.',
       imagen: ''
     }
   ];

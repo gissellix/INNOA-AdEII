@@ -27,7 +27,7 @@ import { CommonModule } from '@angular/common';
             </div>
 
             <p class="text-xs text-gray-400 max-w-md leading-relaxed">
-              El evento referente del NOA en inteligencia artificial, ciberseguridad, neurociencia y desarrollo tecnológico. Organizado por estudiantes para estudiantes e ingenieros.
+              El evento referente del NOA en inteligencia artificial, ciberseguridad, forensia digital y desarrollo tecnológico. Organizado por estudiantes para estudiantes e ingenieros.
             </p>
 
             <div class="flex items-center gap-3 pt-2 text-sm font-mono text-gray-400">

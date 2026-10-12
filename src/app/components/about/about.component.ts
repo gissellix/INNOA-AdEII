@@ -106,10 +106,10 @@ export class AboutComponent {
       colorBorder: 'purple'
     },
     {
-      titulo: 'Neurociencia & Nuevas Tecnologías',
-      icono: 'fa-solid fa-microchip',
-      descripcion: 'Investigaciones de vanguardia en interfaces cerebro-computadora (BCI), biotecnología, IoT industrial y tecnologías emergentes.',
-      temas: ['Interfaces Cerebro-Computadora', 'Internet de las Cosas (IoT)', 'Computación Cuántica & Edge AI'],
+      titulo: 'Forensia Digital & Nuevas Tecnologías',
+      icono: 'fa-solid fa-fingerprint',
+      descripcion: 'Análisis forense computacional, recuperación de evidencia digital, cadena de custodia, respuesta ante incidentes y tecnologías emergentes.',
+      temas: ['Peritaje Informático & Evidencia Digital', 'Análisis de Malware & Logs', 'Cadena de Custodia & Incident Response'],
       colorBorder: 'lime'
     }
   ];

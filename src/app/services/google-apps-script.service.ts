@@ -14,8 +14,8 @@ export interface ResponseInscripcion {
   providedIn: 'root'
 })
 export class GoogleAppsScriptService {
-  // Reemplazar con la URL generada al publicar la Web App en Google Apps Script
-  private webAppUrl = 'https://script.google.com/macros/s/AKfycbxYOUR_GOOGLE_APPS_SCRIPT_ID_HERE/exec';
+  // URL oficial de Google Apps Script Web App conectada a Google Sheets de ADEII
+  private webAppUrl = 'https://script.google.com/macros/s/AKfycbzq9BVgBUBCGNJBoVQvyPxJj_iEMs86wZTEZXgSQ48wSA1J8oC9hFfjhWJ7O_49MP-d/exec';
 
   constructor(private http: HttpClient) {}
 
@@ -33,10 +33,8 @@ export class GoogleAppsScriptService {
    * Envía los datos de la feria de proyectos a Google Apps Script
    */
   enviarInscripcion(datos: ProyectoInscripcion): Observable<ResponseInscripcion> {
-    // Si la URL sigue siendo la de ejemplo o vacía, simulamos envío exitoso para demostración fluida
+    // Si la URL sigue siendo la de ejemplo, simulamos para pruebas locales
     if (this.webAppUrl.includes('YOUR_GOOGLE_APPS_SCRIPT_ID_HERE')) {
-      console.warn('GoogleAppsScriptService: Usando modo de simulación. Por favor configura tu URL de Web App.');
-      
       return new Observable<ResponseInscripcion>(subscriber => {
         setTimeout(() => {
           subscriber.next({
@@ -49,20 +47,21 @@ export class GoogleAppsScriptService {
       });
     }
 
-    // Google Apps Script redirige respuestas con HTTP 302, usamos fetch text/json payload
+    // Google Apps Script Web App recibe JSON mediante POST
+    // text/plain;charset=utf-8 evita bloqueos de preflight CORS en navegadores
     return from(
       fetch(this.webAppUrl, {
         method: 'POST',
-        mode: 'no-cors', // Permite enviar sin bloqueos CORS desde GitHub Pages
+        mode: 'no-cors',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'text/plain;charset=utf-8'
         },
         body: JSON.stringify(datos)
       })
     ).pipe(
       map(() => ({
         success: true,
-        message: 'Inscripción enviada correctamente a Google Sheets y Drive.',
+        message: 'Inscripción enviada y guardada correctamente en Google Sheets.',
         idInscripcion: 'INNOA-' + Math.floor(100000 + Math.random() * 900000)
       })),
       catchError(error => {

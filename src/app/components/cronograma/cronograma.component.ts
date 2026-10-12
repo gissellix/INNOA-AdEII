@@ -91,7 +91,7 @@ export class CronogramaComponent {
       diaNumero: 1,
       fecha: '21 OCT',
       titulo: 'Charlas y Mesa Panel con Profesionales',
-      subtitulo: 'Disertaciones y debates en IA, Ciberseguridad y Neurociencia.',
+      subtitulo: 'Disertaciones y debates en IA, Ciberseguridad y Forensia Digital.',
       color: 'lime',
       horario: '09:00 - 18:00 HS',
       lugar: 'Anfiteatro FI-UNJu',
